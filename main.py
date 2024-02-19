@@ -1,5 +1,6 @@
 import pygame as pg
 import sys
+from backtracking import solve
 
 # What needs to be done
 # 1. Create boxes
@@ -91,6 +92,11 @@ def game_loop():
         for row in range(len(grid)):
             # Goes through each column
             for col in range(len(grid[row])):
+                # Draw the grid lines
+                if row % 3 == 0 and row != 0:
+                    pg.draw.line(screen, "black", (0, row * 50), (600, row * 50), 2)
+                if col % 3 == 0 and col != 0:
+                    pg.draw.line(screen, "black", (col * 50, 0), (col * 50, 450), 2)
                 # If the cell is selected
                 if SELECTED is not None and [row, col] == SELECTED:
                     # Draw a grey rectangle in the selected cell
@@ -120,9 +126,8 @@ def game_loop():
 
         # Draw the new frame
         pg.display.flip()
-
         # Frame rate
-        clock.tick(10)
+        clock.tick(60)
     return
 
 # Main Function
