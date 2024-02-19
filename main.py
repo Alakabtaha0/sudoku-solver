@@ -1,10 +1,11 @@
 import pygame as pg
 import sys
 
-# Create window
-# Set window title
-# make background black
-# Set pixels
+# What needs to be done
+# 1. Create boxes
+# 2. Check game if it's won
+
+
 
 grid = [
         [{"num": None, "init": False}, {"num": None, "init": False}, {"num": 6, "init": True}, {"num": None, "init": False}, {"num": None, "init": False}, {"num": None, "init": False}, {"num": 5, "init": True}, {"num": None, "init": False}, {"num": 8, "init": True}],
@@ -19,6 +20,30 @@ grid = [
     ]
 
 
+def check_win(grid):
+    for row in grid:
+        for col in row:
+            if col['num'] == None:
+                return False
+        
+    # Check each row
+    for row in grid:
+        if sorted(cell['num'] for cell in row) != list(range(1, 10)):
+            return False
+
+    # Check each column
+    for col in range(9):
+        if sorted(grid[row][col]['num'] for row in range(9)) != list(range(1, 10)):
+            return False
+
+    # Check each 3x3 box
+    for box_row in range(3):
+        for box_col in range(3):
+            if sorted(grid[row][col]['num'] for row in range(box_row * 3, box_row * 3 + 3) for col in range(box_col * 3, box_col * 3 + 3)) != list(range(1, 10)):
+                return False
+
+    # If all checks pass, the game is won
+    return True
 
 def game_loop():
     screen = pg.display.set_mode((800, 600))
@@ -51,6 +76,12 @@ def game_loop():
                     # Change the value of the cell to the number
                     grid[SELECTED[0]][SELECTED[1]]['num'] = int(event.unicode)
                     SELECTED = None
+
+        # Check if the game is won
+        if check_win(grid):
+            print("You Win!")
+            running = False
+            break
 
         # RENDERING
         # Update the screen with the new frame
@@ -91,22 +122,19 @@ def game_loop():
         pg.display.flip()
 
         # Frame rate
-        clock.tick(30)
+        clock.tick(10)
     return
 
 # Main Function
 def main():
     # Sudoku Grid
     # Set object so that we can keep track of the initial numbers and no changes can be made
-    
-
     # Initialize Pygame
     pg.init()
     pg.display.set_caption("Sudoku Solver")
-    
-    game_loop()
-    
 
+    game_loop()
+    # Quit Pygame
     pg.quit()
 
 
