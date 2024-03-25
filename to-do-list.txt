@@ -1,0 +1,3 @@
+1. Create front end of app using react native to send an image to the back end
+ 1.1 ensure your front end allows user to change values if the back end get's it wrong
+2. Create API using Django in Python
