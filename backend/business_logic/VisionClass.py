@@ -1,6 +1,6 @@
 import numpy as np
 import cv2 as cv
-from utils import *
+from .utils import *
 
 
 class Vision:
@@ -10,7 +10,7 @@ class Vision:
         self.model_path = model_path
         self.height = 450
         self.width = 450
-        self.model = init_model()
+        self.model = init_model(self.model_path)
     
     def pre_process(self, img):
         # Convert the image to grayscale

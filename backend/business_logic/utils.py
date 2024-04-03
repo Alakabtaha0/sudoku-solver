@@ -43,13 +43,13 @@ def split_cells(img):
     return cells
 
 # Function to load the prediction model
-def init_model():
+def init_model(model):
     # Load TFLite model and allocate tensors.
     # interpreter = tf.lite.Interpreter(model_path="models/2.tflite")
     # interpreter.allocate_tensors()
     # return interpreter
     # model = load_model('models/model.h5')
-    model = tf.keras.models.load_model('models/model.h5')
+    model = tf.keras.models.load_model(model)
     return model
 
 # Function to predict the number in the cell

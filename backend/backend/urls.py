@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
 
 # Over here we're defining the URL configuration for the backend project.
 # The `urlpatterns` list routes URLs to views.
 # The `path()` function is used to define a URL pattern. so it can be different than whatever you named the view function.
+
 urlpatterns = [
-    path('sudoku/', include('sudokuscan.urls')),
-    path('admin/', admin.site.urls)
+    path('', lambda res: HttpResponse('Hello world. This is the first page'), name='read_puzzle'),
+    path('sudoku/', include('sudokuscan.urls')),     
 ]

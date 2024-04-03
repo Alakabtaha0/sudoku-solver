@@ -112,3 +112,6 @@ class Grid:
     def print_grid(self):
         for row in self.grid:
             print(row)
+
+    def return_grid(self):
+        return self.grid
