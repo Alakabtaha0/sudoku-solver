@@ -1,6 +1,8 @@
 import numpy as np
 import cv2 as cv
 import tensorflow as tf
+# tensorflow == 2.15 && keras == 2.15
+# If not working properly make sure tensorflow and keras versions are compatible
 
 # Function to get the biggest contour in the image of the sudoku grid
 def biggest_contour(contours):

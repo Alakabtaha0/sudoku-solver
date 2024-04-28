@@ -28,11 +28,13 @@ class Sudoku(models.Model):
     
     def was_published_recently(self):
         return self.date_created >= tz.now() - dt.timedelta(days=1)
-
+    
+    
+    # Automatically given id's
     name = models.CharField(max_length=100)
     description = models.TextField(max_length=500)
-    image = models.ImageField(upload_to='images/')
-    puzzle = models.JSONField(max_length=81, default=dict)
+    image_data = models.TextField(default='')
+    puzzle = models.JSONField()
     solution = models.JSONField(max_length=81, default=dict)
     date_created = models.DateTimeField(auto_now_add=True, editable=False, blank=False, null=False)
     date_modified = models.DateTimeField(auto_now=True, editable=False, blank=False, null=False)

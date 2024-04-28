@@ -15,7 +15,7 @@ def process_image(image):
     new_grid = []
     new_row = []
     for value in new_grid_values:
-        new_row.append({"num": None if value == 0 else value, "init": value != 0})
+        new_row.append({"num": None if value == 0 else int(value), "init": bool(value != 0)})
         if len(new_row) == 9:
             new_grid.append(new_row)
             new_row = []
