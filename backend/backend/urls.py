@@ -23,6 +23,6 @@ from django.http import HttpResponse
 # The `path()` function is used to define a URL pattern. so it can be different than whatever you named the view function.
 
 urlpatterns = [
-    path('', lambda res: HttpResponse('Hello world. This is the first page'), name='read_puzzle'),
-    path('sudoku/', include('sudokuscan.urls')),     
+    path('', lambda res: HttpResponse('Hello world. This is the first page')),
+    path('sudokus/', include('sudokuscan.urls')),     
 ]

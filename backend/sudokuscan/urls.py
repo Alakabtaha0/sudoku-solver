@@ -8,5 +8,6 @@ from . import views
 # You could have the same view name in different apps.
 app_name='sudokuscan'
 urlpatterns = [
-    path('', views.read_puzzle, name='read_puzzle'),
+    path('', views.sudoku, name='CRUD_sudoku'),
+    path('<int:sudoku_id>', views.one_sudoku, name='one_sudoku'),
 ]
