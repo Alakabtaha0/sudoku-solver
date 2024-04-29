@@ -68,10 +68,9 @@ def sudoku(request):
             puzzle=grid,
         )
         sudoku.save()
-
-        # Return the grid values to the user
+        # return the data to the user and set the content type
         return JsonResponse(
-            {
+            data = {
                 "id": sudoku.id,
                 "name": sudoku.name,
                 "description": sudoku.description,
@@ -109,9 +108,9 @@ def one_sudoku(request, sudoku_id):
     # Update the sudoku object
     elif request.method == "PATCH":
         try:
-          
+
             data = json.loads(request.body)
-            
+
             fields = {
                 "name": data.get("name"),
                 "description": data.get("description"),
@@ -125,23 +124,26 @@ def one_sudoku(request, sudoku_id):
             for field, value in fields.items():
                 if value is not None:
                     setattr(sudoku, field, value)
-            
+
             sudoku.date_modified = dt.datetime.now()
 
             sudoku.save()
 
             # Return a success message
-            return HttpResponse(content=[
-                {
-                    "id": sudoku.id,
-                    "name": sudoku.name,
-                    "description": sudoku.description,
-                    "puzzle": sudoku.puzzle,
-                    "solution": sudoku.solution,
-                    "date_created": sudoku.date_created,
-                    "date_modified": sudoku.date_modified,
-                }
-            ], status=200)
+            return HttpResponse(
+                content=[
+                    {
+                        "id": sudoku.id,
+                        "name": sudoku.name,
+                        "description": sudoku.description,
+                        "puzzle": sudoku.puzzle,
+                        "solution": sudoku.solution,
+                        "date_created": sudoku.date_created,
+                        "date_modified": sudoku.date_modified,
+                    }
+                ],
+                status=200,
+            )
         except Sudoku.DoesNotExist:
             return HttpResponse(content="Sudoku not found", status=404)
 
@@ -153,5 +155,3 @@ def one_sudoku(request, sudoku_id):
             return HttpResponse(content="Sudoku deleted", status=204)
         except Sudoku.DoesNotExist:
             return HttpResponse(content="Sudoku not found", status=404)
-
-
