@@ -10,4 +10,5 @@ app_name='sudokuscan'
 urlpatterns = [
     path('', views.sudoku, name='CRUD_sudoku'),
     path('<int:sudoku_id>', views.one_sudoku, name='one_sudoku'),
+    path('solve/<int:sudoku_id>', views.solve, name='solve_sudoku'),
 ]
